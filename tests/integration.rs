@@ -10,7 +10,10 @@ fn sub_second_tick_is_recent() {
     let mut interval = RtcInterval::new(Duration::from_millis(100));
     let t = interval.tick();
     let skew = t.abs_diff(Timestamp::now());
-    assert!(skew < Duration::from_secs(1), "tick skew too large: {skew:?}");
+    assert!(
+        skew < Duration::from_secs(1),
+        "tick skew too large: {skew:?}"
+    );
 }
 
 /// Sub-second ticks must be monotonically non-decreasing.
@@ -86,7 +89,10 @@ mod async_tests {
             let mut interval = AsyncRtcInterval::new(Duration::from_millis(100));
             let t = interval.tick().await;
             let skew = t.abs_diff(Timestamp::now());
-            assert!(skew < Duration::from_secs(1), "async tick skew too large: {skew:?}");
+            assert!(
+                skew < Duration::from_secs(1),
+                "async tick skew too large: {skew:?}"
+            );
         });
     }
 
